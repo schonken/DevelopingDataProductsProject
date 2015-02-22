@@ -6,8 +6,20 @@ shinyUI(
 
     # Side Panel
     sidebarPanel(
+      p("This Calorie Planner tries to help clarify some of the mystery around BMI, BMR, Calorie Deficits and continued weight loss."),
+      p("The report will update in real-time as you answer the following questions. Enjoy!"),
+      
+      numericInput('weightCurrent', 'Current Weight in kilograms (kg)', 90, min = 40, max = 500, step = 1),
+      tags$div(
+        HTML("<p>Convert pound to kg <a href=\"http://manuelsweb.com/kg_lbs.htm\" target=\"_blank\">here</a>.</p>")
+      ),
       
       numericInput('heightCm', 'Height in centimeters (cm)', 175, min = 40, max = 250, step = 1),
+      
+      tags$div(
+        HTML("<p>Convert feet to centimeters (cm) <a href=\"http://www.manuelsweb.com/ft_in_cm.htm\" target=\"_blank\">here</a>.</p>")
+      ),
+      
       numericInput('ageYears', 'Age in Years', 30, min = 18, max = 85, step = 1),
       radioButtons("gender", "Gender",
                    c("Male (boy)" = "male",
@@ -20,8 +32,12 @@ shinyUI(
                      "Heavy: Intensive exercise for 60 minutes or greater 5 to 7 days per week" = "1.7",
                      "Extreme: Training schedule with multiple training sessions throughout the day" = "1.9")),
       
-      numericInput('weightCurrent', 'Current Weight in kilograms (kg)', 90, min = 40, max = 500, step = 1),
+      h4("Your weight loss goals"),
+      
       numericInput('weightGoal', 'Goal Weight in kilograms (kg)', 80, min = 40, max = 500, step = 1),
+      tags$div(
+        HTML("<p>Convert pound to kg <a href=\"http://manuelsweb.com/kg_lbs.htm\" target=\"_blank\">here</a>.</p>")
+      ),
       
       selectInput("loseRate", "I would like to lose",
                    c("0.25 kg per week" = "0.25",
