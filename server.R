@@ -109,7 +109,7 @@ bmrTimeTableCalculate <- function(gender, weightCurrent, weightGoal, heightCm, a
     activityFactor)
   bmrDiet <- bmrDeficitCalculate(bmr, loseRate)
   
-  if (weightKg >= weightGoal){
+  if (weightKg <= weightGoal){
     bmrDiet <- NA
   }
   
@@ -234,13 +234,13 @@ shinyServer(
           input$activityFactor)
         
         HTML(paste(
-          "<p>According to LIVESTRONG.COM it takes a 7,700 calorie deficit to eliminate 1 kilogram of 
+          "<p>It takes a 7,700 calorie deficit to eliminate 1 kilogram of 
             body fat (<a href=\"http://www.livestrong.com/article/310149-how-many-calories-should-be-burned-to-lose-1-kilogram-of-weight/\">livestrong.com</a>
             , 2013). For you to lose <b>", 
           input$loseRate, 
-          " kg</b> per week you need to create a <b>", 
+          " kg</b> per week you need to create a ", 
           round(7700 * as.numeric(input$loseRate), 0), 
-          " calorie deficit per week</b> resulting in a <b>", 
+          " calorie deficit per week which in turn is a <b>", 
           round(7700 * as.numeric(input$loseRate) / 7, 0), 
           " calorie deficit per day.</b> Given your BMR of ", 
           bmr, 

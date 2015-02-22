@@ -2,9 +2,10 @@ library(shiny)
 shinyUI(
   pageWithSidebar(
     # Application title
-    headerPanel("Basal Metabolic Rate (BMR) inspired Weight Management"),
+    headerPanel("Basal Metabolic Rate (BMR) inspired Calorie Planner"),
+
+    # Side Panel
     sidebarPanel(
-      # h4('Tell us a bit about yourself'),
       
       numericInput('heightCm', 'Height in centimeters (cm)', 175, min = 40, max = 250, step = 1),
       numericInput('ageYears', 'Age in Years', 30, min = 18, max = 85, step = 1),
@@ -29,6 +30,8 @@ shinyUI(
                      "1.0 kg per week" = "1.0"),
                   "0.25")
     ),
+    
+    # Main Panel
     mainPanel(
       htmlOutput("heigthText"),
       tags$div(
