@@ -777,16 +777,16 @@ age and activity level</li>
 <section data-state="section" data-transition="linear" data-transition-speed="default">
 <h2>BMR Calculation</h2>
 <div class="slideContent" >
-<p>At the heart of this <u><b>Calorie Planner</b></u> lies the gender specific BMR (Basal Metabolic Rate) calculation. The male calculation is shown below.</p>
+<p>At the heart of this <u><b>Calorie Planner</b></u> lies the gender specific BMR (Basal Metabolic Rate) calculation. A male calculation example is shown below.</p>
 
-<pre><code class="r">bmr &lt;- (66.47 + (13.75 * weightKg) + (5.003 * heightCm) - (6.755 * ageYears)) * as.numeric(activityFactor)
+<pre><code class="r">weightKg &lt;- 94; heightCm &lt;- 186; 
+ageYears &lt;- 36; activityFactor &lt;- 1.2;
+
+(66.47 + (13.75 * weightKg) + (5.003 * heightCm) - (6.755 * ageYears)) * activityFactor;
 </code></pre>
 
-<p><span style="font-size:smaller;">
-<span style="font-size:smaller;">
-<em>Harris JA, Benedict FG. A biometric study of human basal metabolism. Proc Natl Acad Sci USA 1918;4(12):370-3.</em>
-</span>
-</span></p>
+<pre><code>[1] 2456
+</code></pre>
 
 </div>
 
