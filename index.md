@@ -2,7 +2,7 @@ BMR inspired Calorie Planner
 ========================================================
 date: February 2015
 
-*This App tries to help clarify some of the mistery around BMI, BMR, Calorie Deficits and continued weight loss.*
+*This App tries to help clarify some of the mystery around BMI, BMR, Calorie Deficits and continued weight loss.*
 
 Simply put, this is the <u><b>Calorie Planner</b></u> I've always wanted.
 
@@ -20,18 +20,19 @@ BMR Calculation
 ========================================================
 type: section
 
-At the heart of this <u><b>Calorie Planner</b></u> lies the gender specific BMR (Basal Metabolic Rate) calculation. The male calculation is shown below.
+At the heart of this <u><b>Calorie Planner</b></u> lies the gender specific BMR (Basal Metabolic Rate) calculation. A male calculation example is shown below.
 
 
 ```r
-bmr <- (66.47 + (13.75 * weightKg) + (5.003 * heightCm) - (6.755 * ageYears)) * as.numeric(activityFactor)
+weightKg <- 94; heightCm <- 186; 
+ageYears <- 36; activityFactor <- 1.2;
+
+(66.47 + (13.75 * weightKg) + (5.003 * heightCm) - (6.755 * ageYears)) * activityFactor;
 ```
 
-<span style="font-size:smaller;">
-<span style="font-size:smaller;">
-*Harris JA, Benedict FG. A biometric study of human basal metabolism. Proc Natl Acad Sci USA 1918;4(12):370-3.*
-</span>
-</span>
+```
+[1] 2456
+```
 
 Calorie Plan
 ========================================================
