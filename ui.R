@@ -1,4 +1,6 @@
 library(shiny)
+require(rCharts)
+
 shinyUI(
   pageWithSidebar(
     # Application title
@@ -70,11 +72,6 @@ shinyUI(
       htmlOutput("bmrText"),
       
       h3("Creating your Calorie Deficit"),
-      
-#       tags$div(
-#         HTML("<p>According to LIVESTRONG.COM it would take a 7,700 calorie deficit to eliminate 1 kilogram of 
-#             body fat (<a href=\"http://www.livestrong.com/article/310149-how-many-calories-should-be-burned-to-lose-1-kilogram-of-weight/\">livestrong.com</a>, 2013).</p>")
-#       ),
       
       htmlOutput("calorieDeficitText"),
       

@@ -1,4 +1,5 @@
 library(shiny)
+require(rCharts)
 
 # Basal Metabolic Rate (BMR)
 # ==========================
@@ -91,7 +92,7 @@ bmiWeightTableCalculate <- function(heightCm){
 
 # Maintained Weight Loss Table
 # ============================
-bmrTimeTableCalculate <- function(gender, weightCurrent, weightGoal, heightCm, ageYears, activityFactor, loseRate){
+bmrTimeTableCalculate <- function(gender, weightCurrent, weightGoal, heightCm, ageYears, activityFactor, loseRate, shortColumnNames){
   week <- 0
   
   weightKg <- weightCurrent
@@ -147,13 +148,24 @@ bmrTimeTableCalculate <- function(gender, weightCurrent, weightGoal, heightCm, a
     colDiet <- c(colDiet, bmrDiet)
   }
   
-  bmrTimeTableCalculate <- data.frame(
-    "Week" = colWeek,
-    "Weight" = colWeight,
-    "Lost kg" = colLostKg,
-    "BMR" = colBMR,
-    "Calorie per day Diet" = colDiet
-  )
+  if (shortColumnNames == TRUE)
+  {
+    bmrTimeTableCalculate <- data.frame(
+      "Week" = colWeek,
+      "Weight" = colWeight,
+      "Lost" = colLostKg,
+      "BMR" = colBMR,
+      "Diet" = colDiet
+    )
+  }else{
+    bmrTimeTableCalculate <- data.frame(
+      "Week" = colWeek,
+      "Weight" = colWeight,
+      "Lost kg" = colLostKg,
+      "BMR" = colBMR,
+      "Calorie per day Diet" = colDiet
+    )
+  }
   
   bmrTimeTableCalculate
 }
@@ -177,7 +189,8 @@ shinyServer(
           input$heightCm, 
           input$ageYears, 
           input$activityFactor, 
-          input$loseRate)
+          input$loseRate,
+          FALSE)
       },
       include.rownames=FALSE
     )
@@ -208,6 +221,13 @@ shinyServer(
 
     output$bmrText <- renderUI(
       {
+        bmrBase <- bmrCalculate(
+          input$gender, 
+          input$weightCurrent, 
+          input$heightCm, 
+          input$ageYears, 
+          1)
+        
         bmr <- bmrCalculate(
           input$gender, 
           input$weightCurrent, 
@@ -216,7 +236,9 @@ shinyServer(
           input$activityFactor)
         
         HTML(paste(
-          "Your BMR given your activity level is <b>", 
+          "Your base BMR is <b>", 
+          bmrBase, 
+          " calories</b> per day. Your BMR given your activity level is <b>", 
           bmr, 
           " calories</b> per day. This simply means you have to consume <b>", 
           bmr, 
