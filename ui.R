@@ -8,8 +8,7 @@ shinyUI(
 
     # Side Panel
     sidebarPanel(
-      p("This Calorie Planner tries to help clarify some of the mystery around BMI, BMR, Calorie Deficits and continued weight loss."),
-      p("The report will update in real-time as you answer the following questions. Enjoy!"),
+      p("Your Calorie Plan will update in real-time as you answer the following questions. Enjoy!"),
       
       numericInput('weightCurrent', 'Current Weight in kilograms (kg)', 90, min = 40, max = 500, step = 1),
       tags$div(
@@ -51,52 +50,82 @@ shinyUI(
     
     # Main Panel
     mainPanel(
-      htmlOutput("heigthText"),
-      tags$div(
-        HTML("<p><i>\"A large body of research supports the idea that people with higher BMIs are more prone 
-             to a number of health-related complications. A review article published in the Lancet (a very 
-             highly respected medical journal) showed a significant increase in cancer with a 5 kg/m<sup>2</sup> 
-             increase in BMI.\"</i> (<a href=\"http://www.builtlean.com/2013/07/17/bmi-chart/\">builtlean.com</a>, 2013)</p>")
-      ),
-      
-      tableOutput("bmiWeightTable"),
-      
-      h3("Basal Metabolic Rate (BMR)"),
-      
-      tags$div(
-        HTML("<p><i>\"Basal metabolic rate (BMR) is the amount of energy required to maintain the body's normal 
-             metabolic activity, such as respiration, maintenance of body temperature (thermogenesis), and 
-             digestion.\"</i> (<a href=\"http://www.globalrph.com/harris-benedict-equation.htm\">globalrph.com</a>, 2015)</p>")
-      ),
-      
-      htmlOutput("bmrText"),
-      
-      h3("Creating your Calorie Deficit"),
-      
-      htmlOutput("calorieDeficitText"),
-      
-      h3("Maintaining your Calorie Deficit"),
-      tags$div(
-        HTML("<p>Your Basal Metabolic Rate (BMR) decreases as you lose weight. A common weight loss trap is starting your diet
-          at a certain calorie level and keeping it steady. This leads to a decrease in weight loss until
-          you completely plateau. The following table suggests month by month adjustments as your weight decreases to
-          help you avoid this trap.</p>")
-      ),
-      
-      tableOutput("bmrTimeTableCalculate"),
-      
-      h3("Keeping track of your new lifestyle"),
-      tags$div(
-        HTML("<p>Counting calories can become very tedious if not near 
-        impossible. <a href=\"http://www.myfitnesspal.com/\">MyFittnessPal.com</a> is a great free tool for doing 
-        just that. They even have an iPhone app that will scan the barcode on your food for easy calorie counting.
-        <a href=\"http://www.fitocracy.com\">Fitocracy.com</a> is a fitness centered social network that rewards
-             you for doing and keeping track of your exercise.</p>")
-      ),
-      
-      h3("Disclaimer"),
-      p("The material on this site is provided for informational purposes only and is not medical advice. Always consult
-        your physician before beginning any diet or exercise program.")
+      tabsetPanel(
+        tabPanel("My Calorie Plan", 
+          htmlOutput("heigthText"),
+          tags$div(
+            HTML("<p><i>\"A large body of research supports the idea that people with higher BMIs are more prone 
+                 to a number of health-related complications. A review article published in the Lancet (a very 
+                 highly respected medical journal) showed a significant increase in cancer with a 5 kg/m<sup>2</sup> 
+                 increase in BMI.\"</i> (<a href=\"http://www.builtlean.com/2013/07/17/bmi-chart/\">builtlean.com</a>, 2013)</p>")
+          ),
+          
+          tableOutput("bmiWeightTable"),
+          
+          h3("Basal Metabolic Rate (BMR)"),
+          
+          tags$div(
+            HTML("<p><i>\"Basal metabolic rate (BMR) is the amount of energy required to maintain the body's normal 
+                 metabolic activity, such as respiration, maintenance of body temperature (thermogenesis), and 
+                 digestion.\"</i> (<a href=\"http://www.globalrph.com/harris-benedict-equation.htm\">globalrph.com</a>, 2015)</p>")
+          ),
+          
+          htmlOutput("bmrText"),
+          
+          h3("Creating your Calorie Deficit"),
+          
+          htmlOutput("calorieDeficitText"),
+          
+          h3("Maintaining your Calorie Deficit"),
+          tags$div(
+            HTML("<p>Your Basal Metabolic Rate (BMR) decreases as you lose weight. A common weight loss trap is starting your diet
+              at a certain calorie level and keeping it steady. This leads to a decrease in weight loss until
+              you completely plateau. The following table suggests month by month adjustments as your weight decreases to
+              help you avoid this trap.</p>")
+          ),
+          
+          tableOutput("bmrTimeTableCalculate"),
+          
+          h3("Keeping track of your new lifestyle"),
+          tags$div(
+            HTML("<p>Counting calories can become very tedious if not near 
+            impossible. <a href=\"http://www.myfitnesspal.com/\">MyFittnessPal.com</a> is a great free tool for doing 
+            just that. They even have an iPhone app that will scan the barcode on your food for easy calorie counting.
+            <a href=\"http://www.fitocracy.com\">Fitocracy.com</a> is a fitness centered social network that rewards
+                 you for doing and keeping track of your exercise.</p>")
+          )
+        ),
+        tabPanel("Legal", 
+                 h3("Disclaimer"),
+                 p("The material on this site is provided for informational purposes only and is not medical advice. Always consult
+            your physician before beginning any diet or exercise program.")
+        ),
+        tabPanel("Help", 
+                 h3("How do I use this app"),
+                 p("This Calorie Planner tries to help clarify some of the mystery around BMI, BMR, Calorie Deficits 
+                   and continued weight loss. Your Calorie Plan will update in real-time as you answer the questions 
+                   listed in the left hand side panel. Complete them from top to bottom and keep an eye on your Calorie
+                   as you go. We suggest you use the Body Mass Index (BMI) table weight ranges to help you pick your
+                   goal weight."),
+                 
+                 h3("Who is the intended audience"),
+                 p("Adult (18+) males and females looking to lose some weight using a calorie controlled plan."),
+                 
+                 h3("Metric vs. Imperial"),
+                 p("This application was developed using the metric system for both weight and heigth. Appoligies 
+                   if this is not you preference. We have provided links to online conversion utilities to help
+                   you convert your measurement to the metric system."),
+                 
+                 h3("Calorie Planner Steps"),
+                 p("This Calorie Planner takes the following approach to calculating your Calorie Plan."),
+                 tags$ul(
+                   tags$li("Start of by calculating a user's height specific BMI (Body Mass Index) table listing not only the BMI score ranges but also the associated weight ranges"),
+                   tags$li("Calculate the user's BMR (Basal Metabolic Rate) given their gender, weight, height, age and activity level"),
+                   tags$li("Calculate the Calorie Deficit required to achive the user's weekly weight loss goal"),
+                   tags$li("Tabulate the Calorie Plan taking into account that BMR declines as you lose weight")
+                 )
+        )
+      )
     )
   )
 )
